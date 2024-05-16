@@ -20,8 +20,16 @@ class _SplashContentState extends State<SplashContent> {
     return Column(
       children: <Widget>[
         const Spacer(),
+        ClipOval( // Wrap the Image.asset with ClipOval
+          child: Image.asset(
+            'assets/images/snapshop_logo.png', // Import the logo image
+            height: 80, // Adjust the height of the logo as needed
+            width: 80, // Adjust the width of the logo as needed
+          ),
+        ),
+        const SizedBox(height: 20), // Add some space between logo and text
         const Text(
-          "TOKOTO",
+          "SnapShop",
           style: TextStyle(
             fontSize: 32,
             color: kPrimaryColor,
@@ -36,9 +44,10 @@ class _SplashContentState extends State<SplashContent> {
         Image.asset(
           widget.image!,
           height: 265,
-          width: 235,
+          width: 335,
         ),
       ],
     );
   }
 }
+

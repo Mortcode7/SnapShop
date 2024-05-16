@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:snapshop/screens/Seller/seller_screen.dart';
 import 'package:snapshop/screens/categories/categories_screen.dart';
 import 'screens/products/products_screen.dart';
 import 'screens/cart/cart_screen.dart';
@@ -31,4 +32,5 @@ final Map<String, WidgetBuilder> routes = {
   CartScreen.routeName: (context) => const CartScreen(),
   ProfileScreen.routeName: (context) => const ProfileScreen(),
   CategoriesScreen.routeName: (context) => const CategoriesScreen(),
+  SellerScreen.routeName: (context) => const SellerScreen(),
 };

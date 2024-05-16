@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:snapshop/screens/Seller/seller_screen.dart';
 
 import 'components/profile_menu.dart';
 import 'components/profile_pic.dart';
@@ -30,6 +31,11 @@ class ProfileScreen extends StatelessWidget {
               press: () {},
             ),
             ProfileMenu(
+              text: "I am a seller",
+              icon: "assets/icons/User Icon.svg",
+              press: () {Navigator.push(context, MaterialPageRoute(builder: (context)=>const SellerScreen()));},
+            ),
+            ProfileMenu(
               text: "Settings",
               icon: "assets/icons/Settings.svg",
               press: () {},
@@ -44,6 +50,7 @@ class ProfileScreen extends StatelessWidget {
               icon: "assets/icons/Log out.svg",
               press: () {},
             ),
+
           ],
         ),
       ),
