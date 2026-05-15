@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../components/custom_surfix_icon.dart';
 import '../../../components/form_error.dart';
 import '../../../components/no_account_text.dart';
+import '../../../components/default_button.dart';
 import '../../../constants.dart';
 
 class ForgotPassForm extends StatefulWidget {
@@ -63,13 +64,13 @@ class _ForgotPassFormState extends State<ForgotPassForm> {
           const SizedBox(height: 8),
           FormError(errors: errors),
           const SizedBox(height: 8),
-          ElevatedButton(
-            onPressed: () {
+          DefaultButton(
+            text: "Continue",
+            press: () {
               if (_formKey.currentState!.validate()) {
                 // Do what you want to do
               }
             },
-            child: const Text("Continue"),
           ),
           const SizedBox(height: 16),
           const NoAccountText(),

@@ -1,8 +1,11 @@
 import 'package:flutter/widgets.dart';
 import 'package:snapshop/screens/Seller/seller_screen.dart';
-import 'package:snapshop/screens/categories/categories_screen.dart';
+//import 'package:snapshop/screens/categories/.dart';
+//import 'package:snapshop/screens/categories/categories_screen.dart';
+import 'package:snapshop/screens/gender/gender_products_screen.dart';
+import 'package:snapshop/screens/order/order_screen.dart';
 import 'screens/products/products_screen.dart';
-import 'screens/cart/cart_screen.dart';
+import 'screens/cart/CartScreen.dart';
 import 'screens/complete_profile/complete_profile_screen.dart';
 import 'screens/details/details_screen.dart';
 import 'screens/forgot_password/forgot_password_screen.dart';
@@ -29,8 +32,10 @@ final Map<String, WidgetBuilder> routes = {
   HomeScreen.routeName: (context) => const HomeScreen(),
   ProductsScreen.routeName: (context) => const ProductsScreen(),
   DetailsScreen.routeName: (context) => const DetailsScreen(),
-  CartScreen.routeName: (context) => const CartScreen(),
+  CartScreen.routeName: (context) => CartScreen(),
   ProfileScreen.routeName: (context) => const ProfileScreen(),
-  CategoriesScreen.routeName: (context) => const CategoriesScreen(),
+  //Categories.routeName: (context) => const CategoriesScreen(),
   SellerScreen.routeName: (context) => const SellerScreen(),
+  OrderScreen.routeName: (context) =>  OrderScreen(),
+   //GenderProductsScreen.routeName: (context) =>  GenderProductsScreen(),
 };

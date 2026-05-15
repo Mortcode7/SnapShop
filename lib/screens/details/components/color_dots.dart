@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../components/rounded_icon_btn.dart';
 import '../../../constants.dart';
-import '../../../models/Product.dart';
+import '../../../models/products.dart';
 
 class ColorDots extends StatelessWidget {
   const ColorDots({
@@ -20,13 +20,13 @@ class ColorDots extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Row(
         children: [
-          ...List.generate(
-            product.colors.length,
-            (index) => ColorDot(
-              color: product.colors[index],
-              isSelected: index == selectedColor,
-            ),
-          ),
+          // ...List.generate(
+          //   product.colors.length,
+          //   (index) => ColorDot(
+          //     color: product.colors[index],
+          //     isSelected: index == selectedColor,
+          //   ),
+          // ),
           const Spacer(),
           RoundedIconBtn(
             icon: Icons.remove,

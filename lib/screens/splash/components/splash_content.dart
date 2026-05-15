@@ -20,31 +20,24 @@ class _SplashContentState extends State<SplashContent> {
     return Column(
       children: <Widget>[
         const Spacer(),
-        ClipOval( // Wrap the Image.asset with ClipOval
-          child: Image.asset(
-            'assets/images/snapshop_logo.png', // Import the logo image
-            height: 80, // Adjust the height of the logo as needed
-            width: 80, // Adjust the width of the logo as needed
-          ),
-        ),
-        const SizedBox(height: 20), // Add some space between logo and text
-        const Text(
-          "SnapShop",
-          style: TextStyle(
-            fontSize: 32,
-            color: kPrimaryColor,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        Text(
-          widget.text!,
-          textAlign: TextAlign.center,
-        ),
-        const Spacer(flex: 2),
         Image.asset(
           widget.image!,
-          height: 265,
-          width: 335,
+          height: 334,
+          width: double.infinity,
+          fit: BoxFit.contain,
+        ),
+        const SizedBox(height: 10),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Text(
+            widget.text!,
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              fontSize: 18,
+              color: kSecondaryColor,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ),
       ],
     );

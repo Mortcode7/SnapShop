@@ -10,8 +10,8 @@ class AppTheme {
       appBarTheme: const AppBarTheme(
           color: Colors.white,
           elevation: 0,
-          iconTheme: IconThemeData(color: Colors.black),
-          titleTextStyle: TextStyle(color: Colors.black)),
+          iconTheme: IconThemeData(color: kTextColor),
+          titleTextStyle: TextStyle(color: kTextColor)),
       textTheme: const TextTheme(
         bodyLarge: TextStyle(color: kTextColor),
         bodyMedium: TextStyle(color: kTextColor),

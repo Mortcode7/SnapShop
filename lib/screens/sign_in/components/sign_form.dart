@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import '../../../globals.dart' as globals; // Import the globals.dart file
 
 import '../../../components/custom_surfix_icon.dart';
 import '../../../components/form_error.dart';
+import '../../../components/default_button.dart';
 import '../../../constants.dart';
 import '../../../helper/keyboard.dart';
 import '../../forgot_password/forgot_password_screen.dart';
 import '../../login_success/login_success_screen.dart';
+import '../../seller/seller_screen.dart'; // Import SellerScreen
 
 class SignForm extends StatefulWidget {
   const SignForm({super.key});
@@ -19,8 +23,9 @@ class _SignFormState extends State<SignForm> {
   String? email;
   String? password;
   bool? remember = false;
+  bool _obscureText = true; // Variable to track password visibility
   final List<String?> errors = [];
-                           
+
   void addError({String? error}) {
     if (!errors.contains(error)) {
       setState(() {
@@ -67,15 +72,13 @@ class _SignFormState extends State<SignForm> {
             decoration: const InputDecoration(
               labelText: "Email",
               hintText: "Enter your email",
-              // If  you are using latest version of flutter then lable text and hint text shown like this
-              // if you r using flutter less then 1.20.* then maybe this is not working properly
               floatingLabelBehavior: FloatingLabelBehavior.always,
               suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Mail.svg"),
             ),
           ),
           const SizedBox(height: 20),
           TextFormField(
-            obscureText: true,
+            obscureText: _obscureText, // Bind to obscureText property
             onSaved: (newValue) => password = newValue,
             onChanged: (value) {
               if (value.isNotEmpty) {
@@ -95,13 +98,20 @@ class _SignFormState extends State<SignForm> {
               }
               return null;
             },
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               labelText: "Password",
               hintText: "Enter your password",
-              // If  you are using latest version of flutter then lable text and hint text shown like this
-              // if you r using flutter less then 1.20.* then maybe this is not working properly
               floatingLabelBehavior: FloatingLabelBehavior.always,
-              suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Lock.svg"),
+              suffixIcon: IconButton(
+                icon: Icon(
+                  _obscureText ? Icons.visibility_off : Icons.visibility,color: kSecondaryColor,
+                ),
+                onPressed: () {
+                  setState(() {
+                    _obscureText = !_obscureText; // Toggle password visibility
+                  });
+                },
+              ),
             ),
           ),
           const SizedBox(height: 20),
@@ -130,16 +140,55 @@ class _SignFormState extends State<SignForm> {
           ),
           FormError(errors: errors),
           const SizedBox(height: 16),
-          ElevatedButton(
-            onPressed: () {
+          DefaultButton(
+            text: "Continue",
+            press: () async {
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
-                // if all are valid then go to success screen
                 KeyboardUtil.hideKeyboard(context);
-                Navigator.pushNamed(context, LoginSuccessScreen.routeName);
+
+                // Send sign-in request to PHP endpoint
+                var response = await http.post(
+                  Uri.parse('http://192.168.1.5/signin.php'), // Use your IP address
+                  body: {
+                    'email': email!,
+                    'password': password!,
+                  },
+                );
+
+                // Handle response
+                if (response.statusCode == 200) {
+                  String responseBody = response.body.trim(); // Trim any extra whitespace
+
+                  if (responseBody.startsWith('error:')) {
+                    // Sign-in failed, show error message
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text(responseBody.substring(6))),
+                    );
+                  } else {
+                    List<String> parts = responseBody.split(',');
+                    int userId = int.parse(parts[0]);
+                    String acctype = parts[1];
+
+                    globals.userId = userId;
+                    globals.acctype = acctype;  // Use global variable if needed
+                    print("User ID: $userId");
+                    print("Account Type: $acctype");
+
+                    if (acctype == 'store') {
+                      Navigator.pushNamed(context, SellerScreen.routeName);
+                    } else {
+                      Navigator.pushNamed(context, LoginSuccessScreen.routeName);
+                    }
+                  }
+                } else {
+                  // Error in connection to server
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Failed to connect to server')),
+                  );
+                }
               }
             },
-            child: const Text("Continue"),
           ),
         ],
       ),

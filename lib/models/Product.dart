@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Product {
+class productaa {
   final int id;
   final String title, description, type,gender;
   final List<String> images;
@@ -8,7 +8,7 @@ class Product {
   final double rating, price;
   final bool isFavourite, isPopular;
 
-  Product({
+  productaa({
     required this.id,
     required this.images,
     required this.colors,
@@ -23,10 +23,10 @@ class Product {
   });
 }
 
-// Our demo Products
+// Our demo productas
 
-List<Product> demoProducts = [
-  Product(
+List<productaa> demoproductas = [
+  productaa(
     id: 1,
     images: [
       "assets/images/ps4_console_white_1.png",
@@ -38,6 +38,8 @@ List<Product> demoProducts = [
       const Color(0xFFF6625E),
       const Color(0xFF836DB8),
       const Color(0xFFDECB9C),
+      Colors.red,
+      Colors.blue,
       Colors.white,
     ],
     title: "Wireless Controller for PS4™",
@@ -52,10 +54,10 @@ List<Product> demoProducts = [
 
 
   ),
-  Product(
+  productaa(
     id: 2,
     images: [
-      "assets/images/Image Popular Product 2.png",
+      "assets/images/Image Popular producta 2.png",
     ],
     colors: [
       const Color(0xFFF6625E),
@@ -71,7 +73,7 @@ List<Product> demoProducts = [
     type: "pants",
     gender: "men",
   ),
-  Product(
+  productaa(
     id: 3,
     images: [
       "assets/images/glap.png",
@@ -91,7 +93,7 @@ List<Product> demoProducts = [
     type: "pants",
     gender: "men",
   ),
-  Product(
+  productaa(
     id: 4,
     images: [
       "assets/images/wireless headset.png",
@@ -110,7 +112,7 @@ List<Product> demoProducts = [
     type: "shoes",
     gender: "men",
   ),
-  Product(
+  productaa(
     id: 1,
     images: [
       "assets/images/ps4_console_white_1.png",
@@ -133,10 +135,10 @@ List<Product> demoProducts = [
     type: "shoes",
     gender: "men",
   ),
-  Product(
+  productaa(
     id: 2,
     images: [
-      "assets/images/Image Popular Product 2.png",
+      "assets/images/Image Popular producta 2.png",
     ],
     colors: [
       const Color(0xFFF6625E),
@@ -152,7 +154,7 @@ List<Product> demoProducts = [
     type: "pants",
     gender: "men",
   ),
-  Product(
+  productaa(
     id: 3,
     images: [
       "assets/images/glap.png",
@@ -172,7 +174,7 @@ List<Product> demoProducts = [
     type: "pants",
     gender: "women",
   ),
-  Product(
+  productaa(
     id: 4,
     images: [
       "assets/images/wireless headset.png",

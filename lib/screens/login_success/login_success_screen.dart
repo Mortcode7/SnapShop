@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:snapshop/screens/init_screen.dart';
+import '../../components/default_button.dart';
 
 class LoginSuccessScreen extends StatelessWidget {
   static String routeName = "/login_success";
@@ -31,11 +32,11 @@ class LoginSuccessScreen extends StatelessWidget {
           const Spacer(),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: ElevatedButton(
-              onPressed: () {
+            child: DefaultButton(
+              text: "Back to home",
+              press: () {
                 Navigator.pushNamed(context, InitScreen.routeName);
               },
-              child: const Text("Back to home"),
             ),
           ),
           const Spacer(),

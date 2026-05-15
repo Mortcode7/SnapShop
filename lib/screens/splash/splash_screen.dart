@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
 import '../../constants.dart';
+import '../../components/default_button.dart';
 import '../sign_in/sign_in_screen.dart';
 import 'components/splash_content.dart';
 
 class SplashScreen extends StatefulWidget {
   static String routeName = "/splash";
 
-  const SplashScreen({super.key});
+  const SplashScreen({Key? key}) : super(key: key);
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
@@ -17,82 +18,101 @@ class _SplashScreenState extends State<SplashScreen> {
   int currentPage = 0;
   List<Map<String, String>> splashData = [
     {
-      "text": "Welcome to Snapshop, Let’s shop!",
-      "image": "assets/images/splash_1.png"
+      "title": "SNAPSHOP",
+      "text": "Welcome to Snapshop\nYour Premium Shopping Experience",
+      "image": "assets/images/BlueSplash1.png"
     },
     {
-      "text":
-      "We help people connect with store \naround Algeria",
-      "image": "assets/images/splash_2.png"
+      "title": "CONNECT",
+      "text": "Connecting You to Local Stores\nAcross Algeria",
+      "image": "assets/images/BlueSplash2.png"
     },
     {
-      "text": "We show the easy way to shop. \nJust stay at home with us",
-      "image": "assets/images/splash_3.png"
+      "title": "CONVENIENCE",
+      "text": "The Easiest Way to Shop\nFrom the Comfort of Your Home",
+      "image": "assets/images/BlueSplash3.png"
     },
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: SizedBox(
-          width: double.infinity,
-          child: Column(
-            children: <Widget>[
-              Expanded(
-                flex: 3,
-                child: PageView.builder(
-                  onPageChanged: (value) {
-                    setState(() {
-                      currentPage = value;
-                    });
-                  },
-                  itemCount: splashData.length,
-                  itemBuilder: (context, index) => SplashContent(
-                    image: splashData[index]["image"],
-                    text: splashData[index]['text'],
+      backgroundColor: Colors.white,
+      body: Stack(
+        children: [
+          SafeArea(
+            child: SizedBox(
+              width: double.infinity,
+              child: Column(
+                children: <Widget>[
+                  Expanded(
+                    flex: 5,
+                    child: PageView.builder(
+                      onPageChanged: (value) {
+                        setState(() {
+                          currentPage = value;
+                        });
+                      },
+                      itemCount: splashData.length,
+                      itemBuilder: (context, index) => SplashContent(
+                        image: splashData[index]["image"],
+                        text: splashData[index]['text'],
+                      ),
+                    ),
                   ),
-                ),
-              ),
-              Expanded(
-                flex: 2,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Column(
-                    children: <Widget>[
-                      const Spacer(),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: List.generate(
-                          splashData.length,
+                  Expanded(
+                    flex: 2,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Column(
+                        children: <Widget>[
+                          const Spacer(),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: List.generate(
+                              splashData.length,
                               (index) => AnimatedContainer(
-                            duration: kAnimationDuration,
-                            margin: const EdgeInsets.only(right: 5),
-                            height: 6,
-                            width: currentPage == index ? 20 : 6,
-                            decoration: BoxDecoration(
-                              color: currentPage == index
-                                  ? kPrimaryColor
-                                  : const Color(0xFFD8D8D8),
-                              borderRadius: BorderRadius.circular(8),
+                                duration: kAnimationDuration,
+                                margin: const EdgeInsets.only(right: 5),
+                                height: 8,
+                                width: currentPage == index ? 24 : 8,
+                                decoration: BoxDecoration(
+                                  gradient: currentPage == index 
+                                    ? kPrimaryGradientColor 
+                                    : null,
+                                  color: currentPage == index
+                                      ? null
+                                      : const Color(0xFFD8D8D8),
+                                  borderRadius: BorderRadius.circular(4),
+                                  boxShadow: currentPage == index ? [
+                                    BoxShadow(
+                                      color: kPrimaryColor.withOpacity(0.3),
+                                      blurRadius: 4,
+                                      offset: const Offset(0, 2),
+                                    )
+                                  ] : [],
+                                ),
+                              ),
                             ),
                           ),
-                        ),
+                          const Spacer(flex: 2),
+                          DefaultButton(
+                            text: "Continue",
+                            press: () {
+                              Navigator.pushNamed(
+                                  context, SignInScreen.routeName);
+                            },
+                          ),
+                          const Spacer(),
+                        ],
                       ),
-                      const Spacer(flex: 3),
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, SignInScreen.routeName);                        },
-                        child: const Text("Continue"),
-                      ),
-                      const Spacer(),
-                    ],
+                    ),
                   ),
-                ),
+                ],
               ),
-            ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
